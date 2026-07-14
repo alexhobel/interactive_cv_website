@@ -2,12 +2,10 @@ import './styles/main.css';
 import { defaultLocale, getLocale } from './i18n/index.js';
 
 const STORAGE_KEY = 'cv-lang';
-const SECTIONS = ['hero', 'profile', 'process', 'experience', 'skills', 'education', 'creative', 'contact'];
+const SECTIONS = ['hero', 'process', 'experience', 'skills', 'education', 'creative', 'contact'];
 
 let currentLocale = defaultLocale;
 let content = getLocale(defaultLocale);
-
-const quickFactIcons = ['01', '02', '03', '04'];
 
 function getStoredLocale() {
   try {
@@ -60,7 +58,6 @@ function updateLangToggle() {
 
 function renderNav() {
   const navItems = [
-    { id: 'profile', label: content.nav.profile },
     { id: 'process', label: content.nav.process },
     { id: 'experience', label: content.nav.experience },
     { id: 'skills', label: content.nav.skills },
@@ -78,29 +75,6 @@ function renderNav() {
 
   mobileList.innerHTML = navItems
     .map(({ id, label }) => `<li><a class="mobile-nav__link" href="#${id}" data-nav="${id}">${label}</a></li>`)
-    .join('');
-}
-
-function renderQuickFacts() {
-  const container = document.getElementById('quick-facts');
-  const items = [
-    { label: content.nav.experience, value: '4 ' + (currentLocale === 'de' ? 'Rollen' : 'roles') },
-    { label: 'Stack', value: 'React · Node.js · Docker' },
-    { label: currentLocale === 'de' ? 'Fokus' : 'Focus', value: currentLocale === 'de' ? 'Web & Produktion' : 'Web & production' },
-    { label: content.ui.location, value: 'Stuttgart' },
-  ];
-
-  container.innerHTML = items
-    .map(
-      (item, i) => `
-    <div class="quick-facts__item">
-      <span class="quick-facts__icon">${quickFactIcons[i]}</span>
-      <div>
-        <dt class="quick-facts__label">${item.label}</dt>
-        <dd class="quick-facts__value">${item.value}</dd>
-      </div>
-    </div>`
-    )
     .join('');
 }
 
@@ -263,7 +237,6 @@ function renderContact() {
 
 function renderDynamicContent() {
   renderNav();
-  renderQuickFacts();
   renderProcess();
   renderExperience();
   renderSkills();

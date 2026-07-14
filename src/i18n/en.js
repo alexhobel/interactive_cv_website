@@ -6,7 +6,6 @@ export default {
   },
 
   nav: {
-    profile: 'Profile',
     process: 'Approach',
     experience: 'Experience',
     skills: 'Skills',
@@ -22,7 +21,6 @@ export default {
     getInTouch: 'Get in touch',
     scrollHint: 'Continue',
     language: 'Language',
-    quickFacts: 'At a glance',
     retroLink: 'Discover the retro version',
     retroHint: 'For the curious: a glimpse into the past',
     available: 'Open to opportunities',
@@ -34,20 +32,14 @@ export default {
     role: 'Software Developer',
     tagline: 'Web · JavaScript · Production Systems',
     summary:
-      'Scalable web solutions with React, Node.js, and Docker — structured delivery, quick onboarding into new systems, pragmatic through to production rollout.',
-  },
-
-  profile: {
-    label: 'Profile',
-    title: 'Web development with structure, depth, and adaptability',
-    text: 'Software developer focused on web development and production-grade JavaScript systems. I build scalable solutions with React, Node.js, MongoDB, and Docker — from requirements analysis and API design through to deployment. I grasp complex systems and domain requirements quickly and translate them into clear, maintainable structures. I combine technical understanding with creativity, product awareness, and a pragmatic, solution-oriented approach.',
+      'Software developer focused on web development and thoughtful digital product delivery. For me, the priority is not just technical implementation, but first understanding requirements, goals, and the context of use. On that basis, I develop solutions — using prototyping, testing, and appropriate processes depending on the project — that are clearly structured, maintainable, and make sense from a domain perspective.',
   },
 
   process: {
     label: 'Approach',
     title: 'From understanding to delivery',
     subtitle:
-      'Human-centered software development — structured, iterative, with a clear focus on requirements, quality, and rollout.',
+      'Structured, iterative, and with a clear focus on requirements, quality, and meaningful implementation. I start by thinking through the problem, the domain requirements, and what the software is meant to achieve — rather than coding blindly. When the project calls for it, I involve stakeholders and follow a human-centered design process. Depending on context, I work pragmatically and solution-oriented instead of dogmatically following a fixed process.',
     steps: [
       {
         id: 'requirements',
