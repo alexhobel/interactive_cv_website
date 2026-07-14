@@ -78,24 +78,6 @@ export default {
         ],
       },
     ],
-    kanban: {
-      title: 'Project management',
-      text: 'Requirements are captured as tickets, structured in a Kanban board, and implemented step by step — transparent and traceable.',
-      columns: [
-        {
-          name: 'Backlog',
-          tickets: ['Capture requirements', 'Define scope', 'Technical concept'],
-        },
-        {
-          name: 'In Progress',
-          tickets: ['API development', 'UI components', 'Integration'],
-        },
-        {
-          name: 'Done',
-          tickets: ['Review', 'Deployment', 'Documentation'],
-        },
-      ],
-    },
   },
 
   experience: {

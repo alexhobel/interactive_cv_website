@@ -29,6 +29,7 @@ function setLocale(code) {
   updateLangToggle();
   applyStaticTranslations();
   renderDynamicContent();
+  refreshScrollEffects();
   updateMeta();
 }
 
@@ -80,15 +81,14 @@ function renderNav() {
 
 function renderProcess() {
   const flow = document.getElementById('process-flow');
-  const kanban = document.getElementById('process-kanban');
-  const { steps, kanban: kanbanData } = content.process;
+  const { steps } = content.process;
 
   flow.innerHTML = `
     <div class="process-steps">
       ${steps
         .map(
           (step, i) => `
-        <article class="process-step reveal" style="--step-index: ${i}">
+        <article class="process-step" style="--step-index: ${i}">
           <div class="process-step__header">
             <span class="process-step__dot" aria-hidden="true"></span>
             <span class="process-step__number">${String(i + 1).padStart(2, '0')}</span>
@@ -101,35 +101,14 @@ function renderProcess() {
         )
         .join('')}
     </div>`;
-
-  kanban.innerHTML = `
-    <div class="kanban-panel">
-      <div class="kanban-panel__header">
-        <h3 class="kanban-panel__title">${kanbanData.title}</h3>
-        <p class="kanban-panel__text">${kanbanData.text}</p>
-      </div>
-      <div class="kanban-board">
-        ${kanbanData.columns
-          .map(
-            (col) => `
-          <div class="kanban-col">
-            <span class="kanban-col__name">${col.name}</span>
-            <ul class="kanban-col__tickets">
-              ${col.tickets.map((ticket) => `<li class="kanban-ticket">${ticket}</li>`).join('')}
-            </ul>
-          </div>`
-          )
-          .join('')}
-      </div>
-    </div>`;
 }
 
 function renderExperience() {
   const timeline = document.getElementById('experience-timeline');
   timeline.innerHTML = content.experience.roles
     .map(
-      (role) => `
-    <article class="exp-item" role="listitem">
+      (role, i) => `
+    <article class="exp-item" role="listitem" style="--exp-i: ${i}">
       <span class="exp-item__marker" aria-hidden="true"></span>
       <div class="exp-item__card">
         <div class="exp-item__header">
@@ -158,8 +137,8 @@ function renderSkills() {
   const grid = document.getElementById('skills-grid');
   grid.innerHTML = content.skills.groups
     .map(
-      (group) => `
-    <div class="skill-group reveal">
+      (group, i) => `
+    <div class="skill-group reveal" style="--reveal-i: ${i}">
       <h3 class="skill-group__name">${group.name}</h3>
       <ul class="skill-group__list">
         ${group.items.map((item) => `<li class="skill-group__item">${item}</li>`).join('')}
@@ -173,8 +152,8 @@ function renderEducation() {
   const list = document.getElementById('education-list');
   list.innerHTML = content.education.items
     .map(
-      (item) => `
-    <article class="edu-item reveal">
+      (item, i) => `
+    <article class="edu-item reveal" style="--reveal-i: ${i}">
       <time class="edu-item__period">${item.period}</time>
       <div class="edu-item__content">
         <h3 class="edu-item__institution">${item.institution}</h3>
@@ -199,7 +178,7 @@ function renderCreative() {
   grid.innerHTML = items
     .map(
       (item, i) => `
-    <article class="creative-card reveal">
+    <article class="creative-card reveal" style="--reveal-i: ${i}">
       <span class="creative-card__index">${String(i + 1).padStart(2, '0')}</span>
       <h3 class="creative-card__title">${item.title}</h3>
       <p class="creative-card__text">${item.text}</p>
@@ -209,7 +188,7 @@ function renderCreative() {
 
   footer.innerHTML = `
     <div class="creative-tools">
-      ${tools.map((tool) => `<span class="creative-tools__tag">${tool}</span>`).join('')}
+      ${tools.map((tool, i) => `<span class="creative-tools__tag" style="--tag-i: ${i}">${tool}</span>`).join('')}
     </div>
     <p class="creative__goal">${goal}</p>`;
 }
@@ -226,8 +205,8 @@ function renderContact() {
 
   container.innerHTML = links
     .map(
-      (link) => `
-    ${link.href ? `<a class="contact-link" href="${link.href}"${link.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>` : '<div class="contact-link">'}
+      (link, i) => `
+    ${link.href ? `<a class="contact-link" style="--link-i: ${i}" href="${link.href}"${link.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>` : `<div class="contact-link" style="--link-i: ${i}">`}
       <span class="contact-link__label">${link.label}</span>
       <span class="contact-link__value">${link.value}</span>
     ${link.href ? '</a>' : '</div>'}`
@@ -303,6 +282,49 @@ function initNavHighlight() {
   });
 }
 
+let sectionObserver;
+
+function initSectionScroll() {
+  if (sectionObserver) sectionObserver.disconnect();
+
+  sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const section = entry.target;
+        section.classList.add('is-in-view');
+        section.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+        sectionObserver.unobserve(section);
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+  );
+
+  document.querySelectorAll('.section-scroll').forEach((section) => {
+    section.classList.remove('is-in-view');
+    sectionObserver.observe(section);
+
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.88 && rect.bottom > 0) {
+      section.classList.add('is-in-view');
+      section.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+      sectionObserver.unobserve(section);
+    }
+  });
+}
+
+function initHeroReveal() {
+  const hero = document.getElementById('hero');
+  requestAnimationFrame(() => {
+    hero?.classList.add('is-loaded');
+  });
+}
+
+function refreshScrollEffects() {
+  initSectionScroll();
+  observeReveal();
+}
+
 let revealObserver;
 
 function observeReveal() {
@@ -317,10 +339,15 @@ function observeReveal() {
         }
       });
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
   );
 
   document.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => {
+    const section = el.closest('.section-scroll');
+    if (section?.classList.contains('is-in-view')) {
+      el.classList.add('is-visible');
+      return;
+    }
     revealObserver.observe(el);
   });
 }
@@ -396,7 +423,8 @@ function init() {
   initHeaderScroll();
   initNavHighlight();
   initScrollAssistant();
-  observeReveal();
+  initHeroReveal();
+  refreshScrollEffects();
 }
 
 init();

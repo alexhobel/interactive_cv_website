@@ -78,28 +78,6 @@ export default {
         ],
       },
     ],
-    kanban: {
-      title: "Projektsteuerung",
-      text: "Anforderungen werden als Tickets erfasst, in einem Kanban-Board strukturiert und Schritt für Schritt umgesetzt — transparent und nachvollziehbar.",
-      columns: [
-        {
-          name: "Backlog",
-          tickets: [
-            "Anforderung erfassen",
-            "Scope definieren",
-            "Technisches Konzept",
-          ],
-        },
-        {
-          name: "In Progress",
-          tickets: ["API-Entwicklung", "UI-Komponenten", "Integration"],
-        },
-        {
-          name: "Done",
-          tickets: ["Review", "Deployment", "Dokumentation"],
-        },
-      ],
-    },
   },
 
   experience: {

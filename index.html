@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
-    <meta name="theme-color" content="#06080d" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
     <title>Loading…</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -76,17 +76,17 @@
       <!-- Hero -->
       <section class="section hero" id="hero" data-section="hero">
         <div class="container">
-          <div class="hero__content reveal">
-            <p class="eyebrow hero__eyebrow">
+          <div class="hero__content">
+            <p class="eyebrow hero__eyebrow reveal-hero" style="--reveal-i: 0">
               <span class="status-dot" aria-hidden="true"></span>
               <span data-i18n="ui.available">Verfügbar für Projekte</span>
               <span class="hero__location" data-i18n="ui.location">Stuttgart, DE</span>
             </p>
-            <h1 class="hero__name">Alexander<br />Hobelsberger</h1>
-            <p class="hero__role" data-i18n="hero.role">Softwareentwickler</p>
-            <p class="hero__tagline" data-i18n="hero.tagline">Web · JavaScript · Produktionssysteme</p>
-            <p class="hero__summary" data-i18n="hero.summary"></p>
-            <div class="hero__actions">
+            <h1 class="hero__name reveal-hero" style="--reveal-i: 1">Alexander<br />Hobelsberger</h1>
+            <p class="hero__role reveal-hero" style="--reveal-i: 2" data-i18n="hero.role">Softwareentwickler</p>
+            <p class="hero__tagline reveal-hero" style="--reveal-i: 3" data-i18n="hero.tagline">Web · JavaScript · Produktionssysteme</p>
+            <p class="hero__summary reveal-hero" style="--reveal-i: 4" data-i18n="hero.summary"></p>
+            <div class="hero__actions reveal-hero" style="--reveal-i: 5">
               <a class="btn btn--primary" href="#contact" data-i18n="ui.getInTouch">Kontakt aufnehmen</a>
               <a class="btn btn--secondary" href="./CV_Hobelsberger.pdf" download data-i18n="ui.downloadCv">PDF Lebenslauf</a>
               <a class="btn btn--ghost" href="https://github.com/alexhobel" target="_blank" rel="noopener noreferrer" data-i18n="ui.viewGithub">GitHub</a>
@@ -99,22 +99,21 @@
       </section>
 
       <!-- Process -->
-      <section class="section process" id="process" data-section="process">
+      <section class="section process section-scroll" id="process" data-section="process">
         <div class="container">
-          <header class="section-header reveal">
+          <header class="section-header">
             <span class="section-label" data-i18n="process.label">Arbeitsweise</span>
             <h2 class="section-title" data-i18n="process.title"></h2>
-            <p class="process__subtitle reveal" data-i18n="process.subtitle"></p>
+            <p class="process__subtitle" data-i18n="process.subtitle"></p>
           </header>
           <div class="process__flow" id="process-flow"></div>
-          <div class="process__kanban reveal" id="process-kanban"></div>
         </div>
       </section>
 
       <!-- Experience -->
-      <section class="section experience" id="experience" data-section="experience">
+      <section class="section experience section-scroll" id="experience" data-section="experience">
         <div class="container">
-          <header class="section-header reveal">
+          <header class="section-header">
             <span class="section-label" data-i18n="experience.label">Berufserfahrung</span>
             <h2 class="section-title" data-i18n="experience.title"></h2>
           </header>
@@ -123,9 +122,9 @@
       </section>
 
       <!-- Skills -->
-      <section class="section skills" id="skills" data-section="skills">
+      <section class="section skills section-scroll" id="skills" data-section="skills">
         <div class="container">
-          <header class="section-header reveal">
+          <header class="section-header">
             <span class="section-label" data-i18n="skills.label">Kernkompetenzen</span>
             <h2 class="section-title" data-i18n="skills.title"></h2>
           </header>
@@ -134,9 +133,9 @@
       </section>
 
       <!-- Education -->
-      <section class="section education" id="education" data-section="education">
+      <section class="section education section-scroll" id="education" data-section="education">
         <div class="container">
-          <header class="section-header reveal">
+          <header class="section-header">
             <span class="section-label" data-i18n="education.label">Bildungsweg</span>
             <h2 class="section-title" data-i18n="education.title"></h2>
           </header>
@@ -145,21 +144,21 @@
       </section>
 
       <!-- Creative -->
-      <section class="section creative" id="creative" data-section="creative">
+      <section class="section creative section-scroll" id="creative" data-section="creative">
         <div class="container">
-          <header class="section-header reveal">
+          <header class="section-header">
             <span class="section-label" data-i18n="creative.label">Kreativ</span>
             <h2 class="section-title" data-i18n="creative.title"></h2>
-            <p class="creative__intro reveal" data-i18n="creative.intro"></p>
+            <p class="creative__intro" data-i18n="creative.intro"></p>
           </header>
           <div class="creative__grid" id="creative-grid"></div>
-          <div class="creative__footer reveal" id="creative-footer"></div>
+          <div class="creative__footer" id="creative-footer"></div>
         </div>
       </section>
 
       <!-- Contact -->
-      <section class="section contact" id="contact" data-section="contact">
-        <div class="container contact__inner reveal">
+      <section class="section contact section-scroll" id="contact" data-section="contact">
+        <div class="container contact__inner">
           <header class="section-header">
             <span class="section-label" data-i18n="contact.label">Kontakt</span>
             <h2 class="section-title" data-i18n="contact.title"></h2>
