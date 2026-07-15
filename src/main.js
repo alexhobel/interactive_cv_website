@@ -6,6 +6,10 @@ const SECTIONS = ['hero', 'process', 'experience', 'skills', 'education', 'creat
 
 let currentLocale = defaultLocale;
 let content = getLocale(defaultLocale);
+let openExperienceId = 'ectool';
+
+const chevronIcon =
+  '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5.5L7 9.5L11 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
 
 function getStoredLocale() {
   try {
@@ -106,30 +110,43 @@ function renderProcess() {
 function renderExperience() {
   const timeline = document.getElementById('experience-timeline');
   timeline.innerHTML = content.experience.roles
-    .map(
-      (role, i) => `
-    <article class="exp-item" role="listitem" style="--exp-i: ${i}">
+    .map((role, i) => {
+      const isOpen = openExperienceId === role.id;
+      return `
+    <article class="exp-item${isOpen ? ' is-open' : ''}" role="listitem" style="--exp-i: ${i}" data-expand-id="${role.id}">
       <span class="exp-item__marker" aria-hidden="true"></span>
       <div class="exp-item__card">
-        <div class="exp-item__header">
-          <div class="exp-item__meta">
-            <span class="exp-item__period">${role.period}</span>
-            <span class="exp-item__location">${role.location}</span>
+        <button
+          class="exp-item__header expand-trigger"
+          type="button"
+          aria-expanded="${isOpen}"
+          aria-controls="exp-details-${role.id}"
+        >
+          <div class="exp-item__summary">
+            <div class="exp-item__meta">
+              <span class="exp-item__period">${role.period}</span>
+              <span class="exp-item__location">${role.location}</span>
+            </div>
+            <h3 class="exp-item__company">${role.company}</h3>
+            <p class="exp-item__title">${role.title}</p>
+            ${
+              role.stack.length
+                ? `<div class="exp-item__stack">${role.stack.map((s) => `<span class="exp-item__tag">${s}</span>`).join('')}</div>`
+                : ''
+            }
           </div>
-          <h3 class="exp-item__company">${role.company}</h3>
-          <p class="exp-item__title">${role.title}</p>
-          ${
-            role.stack.length
-              ? `<div class="exp-item__stack">${role.stack.map((s) => `<span class="exp-item__tag">${s}</span>`).join('')}</div>`
-              : ''
-          }
-          <ul class="exp-item__details">
-            ${role.bullets.map((b) => `<li>${b}</li>`).join('')}
-          </ul>
+          <span class="expand-toggle" aria-hidden="true">${chevronIcon}</span>
+        </button>
+        <div class="expand-body" id="exp-details-${role.id}">
+          <div class="expand-body__inner">
+            <ul class="exp-item__details">
+              ${role.bullets.map((b) => `<li>${b}</li>`).join('')}
+            </ul>
+          </div>
         </div>
       </div>
-    </article>`
-    )
+    </article>`;
+    })
     .join('');
 }
 
@@ -199,7 +216,6 @@ function renderContact() {
   const links = [
     { label: 'Email', value: c.email, href: `mailto:${c.email}` },
     { label: currentLocale === 'de' ? 'Telefon' : 'Phone', value: c.phone, href: `tel:${c.phone.replace(/\s/g, '')}` },
-    { label: 'GitHub', value: c.github, href: `https://${c.github}` },
     { label: currentLocale === 'de' ? 'Standort' : 'Location', value: c.address, href: null },
   ];
 
@@ -222,6 +238,17 @@ function renderDynamicContent() {
   renderEducation();
   renderCreative();
   renderContact();
+}
+
+function initExpandables() {
+  document.getElementById('experience-timeline')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.expand-trigger');
+    if (!btn) return;
+    const id = btn.closest('[data-expand-id]')?.dataset.expandId;
+    if (!id) return;
+    openExperienceId = openExperienceId === id ? null : id;
+    renderExperience();
+  });
 }
 
 function initLanguageToggle() {
@@ -419,6 +446,7 @@ function init() {
   updateMeta();
 
   initLanguageToggle();
+  initExpandables();
   initMobileNav();
   initHeaderScroll();
   initNavHighlight();

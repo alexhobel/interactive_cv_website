@@ -21,16 +21,18 @@ export default {
     getInTouch: 'Get in touch',
     scrollHint: 'Continue',
     language: 'Language',
-    retroLink: 'Discover the retro version',
+    retroLink: 'Retro Experience',
     retroHint: 'For the curious: a glimpse into the past',
     available: 'Open to opportunities',
     location: 'Stuttgart, DE',
     backToTop: 'Back to top',
+    expand: 'Show details',
+    collapse: 'Hide details',
   },
 
   hero: {
     role: 'Software Developer',
-    tagline: 'Web · JavaScript · Production Systems',
+    tagline: 'Web development · Production systems',
     summary:
       'Software developer focused on web development and thoughtful digital product delivery. For me, the priority is not just technical implementation, but first understanding requirements, goals, and the context of use. On that basis, I develop solutions — using prototyping, testing, and appropriate processes depending on the project — that are clearly structured, maintainable, and make sense from a domain perspective.',
   },
@@ -90,6 +92,21 @@ export default {
         location: 'Hybrid · Waiblingen',
         title: 'Software Developer',
         period: 'Since 02/2025',
+        stack: ['React', 'REST', 'CRUD'],
+        bullets: [
+          'Modernization of a monolithic PVX-Plus application based on a BASIC framework.',
+          'Migration of the GUI to a React frontend with structural separation of UI and backend logic.',
+          'Migration of existing server scripts from WindX/NTHost to a REST-based backend.',
+          'Implementation of core CRUD functions and contribution to maintainable architecture for future extensions.',
+          'Improved maintainability and usability through clear component boundaries and a modernized system structure.',
+        ],
+      },
+      {
+        id: 'experteam-dev',
+        company: 'Experteam GmbH',
+        location: 'Remote',
+        title: 'Software Developer',
+        period: '03/2024 – 02/2025',
         stack: ['Node.js', 'MongoDB', 'Docker', 'React', 'GTM'],
         bullets: [
           'Development and rollout of a TCF-certified consent management platform — in production on 120+ webshops and websites.',
@@ -101,32 +118,17 @@ export default {
         ],
       },
       {
-        id: 'experteam-dev',
+        id: 'experteam-student',
         company: 'Experteam GmbH',
         location: 'Remote',
-        title: 'Software Developer',
-        period: '03/2024 – 02/2025',
+        title: 'Working Student',
+        period: '09/2021 – 02/2024',
         stack: ['Node.js', 'React', 'Tracking', 'GTM'],
         bullets: [
           'Concept and development of an early CMP prototype as the foundation for production rollout on 120+ websites.',
           'Conversion and analytics tracking for webshops across 20+ client projects.',
           'Technical support for internal and external teams on tracking, webshop, and implementation questions.',
           'Progressive development from support into technical project delivery and near full-stack tasks.',
-        ],
-      },
-      {
-        id: 'experteam-student',
-        company: 'Experteam GmbH',
-        location: 'Remote',
-        title: 'Working Student',
-        period: '09/2021 – 02/2024',
-        stack: ['React', 'REST', 'CRUD'],
-        bullets: [
-          'Modernization of a monolithic PVX-Plus application based on a BASIC framework.',
-          'Migration of the GUI to a React frontend with structural separation of UI and backend logic.',
-          'Migration of existing server scripts from WindX/NTHost to a REST-based backend.',
-          'Implementation of core CRUD functions and contribution to maintainable architecture for future extensions.',
-          'Improved maintainability and usability through clear component boundaries and a modernized system structure.',
         ],
       },
       {
@@ -143,7 +145,6 @@ export default {
 
   skills: {
     label: 'Core Skills',
-    title: 'Technical stack & working style',
     groups: [
       {
         name: 'Frontend',
@@ -163,7 +164,7 @@ export default {
       },
       {
         name: 'Tools & Workflow',
-        items: ['GitHub', 'Figma', 'Google Tag Manager', 'Cursor AI'],
+        items: ['Figma', 'Google Tag Manager', 'Cursor AI'],
       },
       {
         name: 'Professional',
@@ -208,7 +209,7 @@ export default {
         institution: 'Gewerbliche Berufsschule Waiblingen',
         degree: 'Commercial apprenticeship at Soundland GmbH',
         period: '08/2016 – 07/2018',
-        description: 'Commercial training in retail for musical instruments.',
+        description: 'Commercial vocational training in retail for musical instruments.',
         areas: [],
       },
       {
@@ -217,7 +218,7 @@ export default {
         period: '08/2013 – 07/2015',
         description:
           'Vocational training in music production, film sound, and sound design — the foundation for my technical and creative profile.',
-        areas: ['Film sound', 'Music production', 'Sound design', 'Studio work'],
+        areas: ['Film sound', 'Music production', 'Sound design', 'Studio technology'],
       },
     ],
   },

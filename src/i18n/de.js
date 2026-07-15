@@ -26,6 +26,8 @@ export default {
     available: "Verfügbar für Projekte",
     location: "Stuttgart, DE",
     backToTop: "Nach oben",
+    expand: "Details anzeigen",
+    collapse: "Details ausblenden",
   },
 
   hero: {
@@ -90,7 +92,7 @@ export default {
         location: "Hybrid · Waiblingen",
         title: "Softwareentwickler",
         period: "Seit 02/2025",
-        stack: ["Node.js", "MongoDB", "Docker", "React", "GTM"],
+        stack: ["React", "REST", "CRUD"],
         bullets: [
           "Modernisierung einer monolithischen PVX-Plus Anwendung auf Basis eines BASIC-Frameworks.",
           "Migration der GUI in ein React-Frontend mit struktureller Trennung von UI und Backend-Logik.",
@@ -105,7 +107,7 @@ export default {
         location: "Remote",
         title: "Softwareentwickler",
         period: "03/2024 – 02/2025",
-        stack: ["Node.js", "React", "Tracking", "GTM"],
+        stack: ["Node.js", "MongoDB", "Docker", "React", "GTM"],
         bullets: [
           "Entwicklung und Rollout einer TCF-zertifizierten Consent-Management-Plattform — produktiv auf über 120 Webshops und Websites.",
           "Backend mit Node.js und MongoDB; Betrieb in Docker-Infrastruktur auf zwei Hetzner-Servern in Deutschland mit Replica Set.",
@@ -121,7 +123,7 @@ export default {
         location: "Remote",
         title: "Werkstudent",
         period: "09/2021 – 02/2024",
-        stack: ["React", "REST", "CRUD"],
+        stack: ["Node.js", "React", "Tracking", "GTM"],
         bullets: [
           "Konzeption und Entwicklung eines frühen CMP-Prototyps als Grundlage für den produktiven Rollout auf über 120 Websites.",
           "Conversion- und Analyse-Tracking für Webshops in mehr als 20 Kundenprojekten.",
@@ -168,7 +170,7 @@ export default {
       },
       {
         name: "Tools & Workflow",
-        items: ["GitHub", "Figma", "Google Tag Manager", "Cursor AI"],
+        items: ["Figma", "Google Tag Manager", "Cursor AI"],
       },
       {
         name: "Fachlich",
