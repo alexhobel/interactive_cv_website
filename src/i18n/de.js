@@ -28,6 +28,7 @@ export default {
     backToTop: "Nach oben",
     expand: "Details anzeigen",
     collapse: "Details ausblenden",
+    sectionNav: "Abschnitte",
   },
 
   hero: {

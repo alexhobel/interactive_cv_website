@@ -28,6 +28,7 @@ export default {
     backToTop: 'Back to top',
     expand: 'Show details',
     collapse: 'Hide details',
+    sectionNav: 'Sections',
   },
 
   hero: {

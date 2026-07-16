@@ -74,6 +74,8 @@ function renderNav() {
 
   const desktopList = document.getElementById('nav-list');
   const mobileList = document.getElementById('mobile-nav-list');
+  const dockList = document.getElementById('dock-nav-list');
+  const dockNav = document.getElementById('dock-nav');
 
   desktopList.innerHTML = navItems
     .map(({ id, label }) => `<li><a class="site-nav__link" href="#${id}" data-nav="${id}">${label}</a></li>`)
@@ -82,6 +84,19 @@ function renderNav() {
   mobileList.innerHTML = navItems
     .map(({ id, label }) => `<li><a class="mobile-nav__link" href="#${id}" data-nav="${id}">${label}</a></li>`)
     .join('');
+
+  if (dockList) {
+    dockList.innerHTML = navItems
+      .map(
+        ({ id, label }) =>
+          `<li><a class="dock-nav__link" href="#${id}" data-nav="${id}">${label}</a></li>`
+      )
+      .join('');
+  }
+
+  if (dockNav) {
+    dockNav.setAttribute('aria-label', content.ui.sectionNav || 'Sections');
+  }
 }
 
 function renderProcess() {
@@ -307,6 +322,20 @@ function initHeaderScroll() {
   onScroll();
 }
 
+function initDockNav() {
+  const dock = document.getElementById('dock-nav');
+  if (!dock) return;
+
+  const hero = document.getElementById('hero');
+  const showAfter = () => {
+    const threshold = hero ? hero.offsetHeight * 0.35 : 120;
+    dock.classList.toggle('is-visible', window.scrollY > threshold);
+  };
+
+  window.addEventListener('scroll', showAfter, { passive: true });
+  showAfter();
+}
+
 function initNavHighlight() {
   const links = () => document.querySelectorAll('[data-nav]');
   const sections = SECTIONS.filter((id) => id !== 'hero').map((id) => document.getElementById(id));
@@ -317,7 +346,13 @@ function initNavHighlight() {
         if (entry.isIntersecting) {
           const id = entry.target.id;
           links().forEach((link) => {
-            link.classList.toggle('is-active', link.getAttribute('data-nav') === id);
+            const active = link.getAttribute('data-nav') === id;
+            link.classList.toggle('is-active', active);
+            if (active) {
+              link.setAttribute('aria-current', 'true');
+            } else {
+              link.removeAttribute('aria-current');
+            }
           });
         }
       });
@@ -470,6 +505,7 @@ function init() {
   initExpandables();
   initMobileNav();
   initHeaderScroll();
+  initDockNav();
   initNavHighlight();
   initScrollAssistant();
   initHeroReveal();
