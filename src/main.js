@@ -48,6 +48,17 @@ function applyStaticTranslations() {
     const value = t(key);
     if (value) el.textContent = value;
   });
+
+  document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-aria');
+    const value = t(key);
+    if (value) el.setAttribute('aria-label', value);
+  });
+
+  const langToggle = document.querySelector('[data-lang-toggle]');
+  if (langToggle) {
+    langToggle.setAttribute('aria-label', content.ui.language || 'Language');
+  }
 }
 
 function updateMeta() {
@@ -72,18 +83,8 @@ function renderNav() {
     { id: 'contact', label: content.nav.contact },
   ];
 
-  const desktopList = document.getElementById('nav-list');
-  const mobileList = document.getElementById('mobile-nav-list');
   const dockList = document.getElementById('dock-nav-list');
   const dockNav = document.getElementById('dock-nav');
-
-  desktopList.innerHTML = navItems
-    .map(({ id, label }) => `<li><a class="site-nav__link" href="#${id}" data-nav="${id}">${label}</a></li>`)
-    .join('');
-
-  mobileList.innerHTML = navItems
-    .map(({ id, label }) => `<li><a class="mobile-nav__link" href="#${id}" data-nav="${id}">${label}</a></li>`)
-    .join('');
 
   if (dockList) {
     dockList.innerHTML = navItems
@@ -293,47 +294,13 @@ function initLanguageToggle() {
   });
 }
 
-function initMobileNav() {
-  const toggle = document.querySelector('.nav-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
-
-  toggle?.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    mobileNav.hidden = expanded;
-    document.body.classList.toggle('nav-open', !expanded);
-  });
-
-  mobileNav?.addEventListener('click', (e) => {
-    if (e.target.closest('a')) {
-      toggle.setAttribute('aria-expanded', 'false');
-      mobileNav.hidden = true;
-      document.body.classList.remove('nav-open');
-    }
-  });
-}
-
-function initHeaderScroll() {
-  const header = document.querySelector('.site-header');
-  const onScroll = () => {
-    header.classList.toggle('is-scrolled', window.scrollY > 40);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
-
 function initDockNav() {
   const dock = document.getElementById('dock-nav');
   if (!dock) return;
 
-  const hero = document.getElementById('hero');
-  const showAfter = () => {
-    const threshold = hero ? hero.offsetHeight * 0.35 : 120;
-    dock.classList.toggle('is-visible', window.scrollY > threshold);
-  };
-
-  window.addEventListener('scroll', showAfter, { passive: true });
-  showAfter();
+  requestAnimationFrame(() => {
+    dock.classList.add('is-visible');
+  });
 }
 
 function initNavHighlight() {
@@ -503,8 +470,6 @@ function init() {
 
   initLanguageToggle();
   initExpandables();
-  initMobileNav();
-  initHeaderScroll();
   initDockNav();
   initNavHighlight();
   initScrollAssistant();

@@ -8,7 +8,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-height) + 1rem);
+  scroll-padding-top: 1.5rem;
   scroll-padding-bottom: 5.5rem;
   -webkit-text-size-adjust: 100%;
 }
@@ -28,10 +28,6 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body.nav-open {
-  overflow: hidden;
 }
 
 ::selection {

@@ -19,48 +19,6 @@
 
     <div class="grain" aria-hidden="true"></div>
 
-    <header class="site-header" id="top">
-      <div class="site-header__inner">
-        <a class="site-logo" href="#top" aria-label="Alexander Hobelsberger">
-          <span class="site-logo__mark" aria-hidden="true"></span>
-          <span class="site-logo__text">AH</span>
-        </a>
-
-        <nav class="site-nav" aria-label="Primary">
-          <ul class="site-nav__list" id="nav-list"></ul>
-        </nav>
-
-        <div class="site-header__actions">
-          <button
-            class="lang-toggle"
-            type="button"
-            aria-label="Switch language"
-            data-lang-toggle
-          >
-            <span class="lang-toggle__label" data-i18n="ui.language">Sprache</span>
-            <span class="lang-toggle__switch">
-              <span class="lang-toggle__option" data-lang="de">DE</span>
-              <span class="lang-toggle__option" data-lang="en">EN</span>
-              <span class="lang-toggle__knob" aria-hidden="true"></span>
-            </span>
-          </button>
-
-          <a class="btn btn--ghost btn--sm header-cv-btn" href="./CV_Hobelsberger.pdf" download data-i18n="ui.downloadCv">
-            PDF Lebenslauf
-          </a>
-
-          <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </div>
-
-      <div class="mobile-nav" id="mobile-nav" hidden>
-        <ul class="mobile-nav__list" id="mobile-nav-list"></ul>
-      </div>
-    </header>
-
     <div class="scroll-assistant" id="scroll-assistant" aria-hidden="true">
       <div class="scroll-assistant__track">
         <div class="scroll-assistant__progress"></div>
@@ -195,7 +153,37 @@
     </footer>
 
     <nav class="dock-nav" id="dock-nav" aria-label="Sections">
-      <ul class="dock-nav__list" id="dock-nav-list"></ul>
+      <div class="dock-nav__inner">
+        <ul class="dock-nav__list" id="dock-nav-list"></ul>
+
+        <span class="dock-nav__divider" aria-hidden="true"></span>
+
+        <div class="dock-nav__utils">
+          <button
+            class="dock-nav__lang"
+            type="button"
+            aria-label="Switch language"
+            data-lang-toggle
+          >
+            <span class="dock-nav__lang-option" data-lang="de">DE</span>
+            <span class="dock-nav__lang-option" data-lang="en">EN</span>
+            <span class="dock-nav__lang-knob" aria-hidden="true"></span>
+          </button>
+
+          <a
+            class="dock-nav__cv"
+            href="./CV_Hobelsberger.pdf"
+            download
+            data-i18n-aria="ui.downloadCv"
+          >
+            <svg class="dock-nav__cv-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M7 1.5v7.25M4.25 6.5L7 9.25 9.75 6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 11.5h9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <span class="dock-nav__cv-label" data-i18n="ui.downloadCvShort">PDF</span>
+          </a>
+        </div>
+      </div>
     </nav>
 
     <script type="module" src="/src/main.js"></script>

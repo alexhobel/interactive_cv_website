@@ -1,206 +1,3 @@
-/* Header */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: var(--header-height);
-  transition: background var(--transition), border-color var(--transition), backdrop-filter var(--transition);
-}
-
-.site-header.is-scrolled {
-  background: rgba(6, 8, 13, 0.82);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.site-header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  width: var(--container);
-  margin-inline: auto;
-  gap: var(--space-lg);
-}
-
-.site-logo {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.04em;
-}
-
-.site-logo__mark {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 16px var(--color-accent-glow);
-}
-
-/* Header section nav is permanently hidden — floating dock is primary */
-.site-nav,
-.nav-toggle,
-.mobile-nav {
-  display: none !important;
-}
-
-.site-nav {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.site-nav__list {
-  display: flex;
-  gap: var(--space-xs);
-}
-
-.site-nav__link {
-  padding: var(--space-xs) var(--space-sm);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  border-radius: var(--radius-sm);
-  transition: color var(--transition-fast), background var(--transition-fast);
-}
-
-.site-nav__link:hover,
-.site-nav__link.is-active {
-  color: var(--color-text);
-}
-
-.site-nav__link.is-active {
-  background: var(--color-accent-dim);
-  color: var(--color-accent);
-}
-
-.site-header__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-
-.lang-toggle {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-
-.lang-toggle__label {
-  font-size: 0.75rem;
-  color: var(--color-text-subtle);
-  display: none;
-}
-
-.lang-toggle__switch {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 3px;
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  min-width: 72px;
-}
-
-.lang-toggle__option {
-  position: relative;
-  z-index: 1;
-  padding: 4px 8px;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-align: center;
-  color: var(--color-text-subtle);
-  transition: color var(--transition-fast);
-}
-
-.lang-toggle__option.is-active {
-  color: var(--color-bg);
-}
-
-.lang-toggle__knob {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: calc(50% - 3px);
-  height: calc(100% - 6px);
-  background: var(--color-accent);
-  border-radius: var(--radius-full);
-  transition: transform var(--transition);
-}
-
-html[lang='en'] .lang-toggle__knob {
-  transform: translateX(100%);
-}
-
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-}
-
-.nav-toggle span {
-  display: block;
-  height: 1.5px;
-  background: var(--color-text);
-  transition: transform var(--transition), opacity var(--transition-fast);
-}
-
-.nav-toggle[aria-expanded='true'] span:first-child {
-  transform: translateY(3.75px) rotate(45deg);
-}
-
-.nav-toggle[aria-expanded='true'] span:last-child {
-  transform: translateY(-3.75px) rotate(-45deg);
-}
-
-.mobile-nav {
-  position: fixed;
-  inset: var(--header-height) 0 0 0;
-  background: rgba(6, 8, 13, 0.96);
-  backdrop-filter: blur(20px);
-  padding: var(--space-xl);
-  z-index: 999;
-}
-
-.mobile-nav__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.mobile-nav__link {
-  display: block;
-  padding: var(--space-md);
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  border-bottom: 1px solid var(--color-border);
-}
-
-@media (max-width: 960px) {
-  .header-cv-btn {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .lang-toggle__label {
-    display: none;
-  }
-}
-
 /* Buttons */
 .btn {
   display: inline-flex;
@@ -417,16 +214,18 @@ html[lang='en'] .lang-toggle__knob {
   pointer-events: auto;
 }
 
-body.nav-open .dock-nav {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-50%) translateY(calc(100% + 1rem));
+.dock-nav__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
 }
 
 .dock-nav__list {
   display: flex;
   align-items: center;
   gap: 0.15rem;
+  min-width: 0;
 }
 
 .dock-nav__link {
@@ -485,22 +284,137 @@ body.nav-open .dock-nav {
   transform: scale(1);
 }
 
-@media (max-width: 720px) {
+.dock-nav__divider {
+  width: 1px;
+  height: 1.15rem;
+  margin-inline: 0.2rem;
+  background: rgba(255, 255, 255, 0.14);
+  flex-shrink: 0;
+}
+
+.dock-nav__utils {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding-right: 0.1rem;
+}
+
+.dock-nav__lang {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-width: 4.25rem;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.dock-nav__lang:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.dock-nav__lang:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.dock-nav__lang-option {
+  position: relative;
+  z-index: 1;
+  padding: 0.35rem 0.45rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: var(--color-text-subtle);
+  transition: color var(--transition-fast);
+}
+
+.dock-nav__lang-option.is-active {
+  color: var(--color-bg);
+}
+
+.dock-nav__lang-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 12px var(--color-accent-glow);
+  transition: transform var(--transition);
+}
+
+html[lang='en'] .dock-nav__lang-knob {
+  transform: translateX(100%);
+}
+
+.dock-nav__cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+  border: 1px dashed rgba(94, 234, 212, 0.35);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.dock-nav__cv:hover {
+  background: rgba(94, 234, 212, 0.18);
+  border-color: var(--color-accent);
+  border-style: solid;
+  box-shadow: 0 0 20px rgba(94, 234, 212, 0.15);
+  transform: translateY(-1px);
+}
+
+.dock-nav__cv:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.dock-nav__cv-icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 900px) {
   .dock-nav {
     --dock-inset: 0.85rem;
     padding: 0.28rem;
+    border-radius: 1.5rem;
   }
 
-  .dock-nav__list {
-    gap: 0.05rem;
+  .dock-nav__inner {
+    gap: 0.25rem;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
     max-width: calc(100vw - 1.7rem);
   }
 
-  .dock-nav__list::-webkit-scrollbar {
+  .dock-nav__inner::-webkit-scrollbar {
     display: none;
+  }
+
+  .dock-nav__list {
+    gap: 0.05rem;
   }
 
   .dock-nav__link {
@@ -513,9 +427,26 @@ body.nav-open .dock-nav {
     width: 4px;
     height: 4px;
   }
+
+  .dock-nav__divider {
+    height: 1rem;
+    margin-inline: 0.1rem;
+  }
+
+  .dock-nav__lang {
+    min-width: 3.75rem;
+  }
+
+  .dock-nav__lang-option {
+    padding: 0.3rem 0.35rem;
+  }
+
+  .dock-nav__cv {
+    padding: 0.4rem 0.65rem;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
   .dock-nav__link {
     padding: 0.45rem 0.55rem;
   }

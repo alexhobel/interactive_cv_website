@@ -29,6 +29,7 @@ export default {
     expand: 'Show details',
     collapse: 'Hide details',
     sectionNav: 'Sections',
+    downloadCvShort: 'PDF',
   },
 
   hero: {
