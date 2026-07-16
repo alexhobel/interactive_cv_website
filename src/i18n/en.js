@@ -39,6 +39,9 @@ export default {
     collapse: 'Hide details',
     sectionNav: 'Sections',
     downloadCvShort: 'PDF',
+    themeToggle: 'Toggle theme',
+    themeToLight: 'Switch to light mode',
+    themeToDark: 'Switch to dark mode',
   },
 
   hero: {

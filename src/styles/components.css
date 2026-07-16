@@ -189,14 +189,12 @@
   transform: translateX(-50%) translateY(calc(100% + 2rem));
   max-width: calc(100vw - 2rem);
   padding: 0.35rem;
-  background: rgba(12, 16, 24, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--dock-bg);
+  border: 1px solid var(--dock-border);
   border-radius: var(--radius-full);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.35),
-    0 12px 40px rgba(0, 0, 0, 0.45),
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    var(--dock-shadow),
+    inset 0 1px 0 var(--dock-inset-line);
   backdrop-filter: blur(20px) saturate(1.2);
   -webkit-backdrop-filter: blur(20px) saturate(1.2);
   opacity: 0;
@@ -204,7 +202,8 @@
   transition:
     opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color var(--transition-fast),
+    background var(--transition),
+    border-color var(--transition),
     box-shadow var(--transition);
 }
 
@@ -272,7 +271,7 @@
 
 .dock-nav__link:hover {
   color: var(--color-text);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--dock-hover-bg);
 }
 
 .dock-nav__link:focus-visible {
@@ -283,7 +282,7 @@
 .dock-nav__link.is-active {
   color: var(--color-accent);
   background: var(--color-accent-dim);
-  box-shadow: inset 0 0 0 1px rgba(94, 234, 212, 0.18);
+  box-shadow: inset 0 0 0 1px var(--dock-cv-border);
 }
 
 .dock-nav__link.is-active::before {
@@ -299,7 +298,7 @@
   width: 1px;
   height: 1.15rem;
   margin-inline: 0.2rem;
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--dock-divider);
   flex-shrink: 0;
 }
 
@@ -318,15 +317,15 @@
   align-items: center;
   min-width: 4.25rem;
   padding: 3px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--dock-control-bg);
+  border: 1px solid var(--dock-control-border);
   border-radius: var(--radius-full);
   transition: border-color var(--transition-fast), background var(--transition-fast);
 }
 
 .dock-nav__lang:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: var(--dock-control-hover-bg);
+  border-color: var(--dock-control-hover-border);
 }
 
 .dock-nav__lang:focus-visible {
@@ -366,6 +365,60 @@ html[lang='en'] .dock-nav__lang-knob {
   transform: translateX(100%);
 }
 
+.dock-nav__theme {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  color: var(--color-text-muted);
+  background: var(--dock-control-bg);
+  border: 1px solid var(--dock-control-border);
+  border-radius: var(--radius-full);
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.dock-nav__theme:hover {
+  color: var(--color-accent);
+  background: var(--dock-control-hover-bg);
+  border-color: var(--dock-control-hover-border);
+}
+
+.dock-nav__theme:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.dock-nav__theme-icon {
+  position: absolute;
+  transition: opacity var(--transition-fast), transform var(--transition);
+}
+
+.dock-nav__theme-icon--sun {
+  opacity: 0;
+  transform: scale(0.6) rotate(-30deg);
+}
+
+.dock-nav__theme-icon--moon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+html[data-theme='light'] .dock-nav__theme-icon--sun {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+html[data-theme='light'] .dock-nav__theme-icon--moon {
+  opacity: 0;
+  transform: scale(0.6) rotate(30deg);
+}
+
 .dock-nav__cv {
   display: inline-flex;
   align-items: center;
@@ -376,7 +429,7 @@ html[lang='en'] .dock-nav__lang-knob {
   letter-spacing: 0.04em;
   color: var(--color-accent);
   background: var(--color-accent-dim);
-  border: 1px dashed rgba(94, 234, 212, 0.35);
+  border: 1px dashed var(--dock-cv-border);
   border-radius: var(--radius-full);
   white-space: nowrap;
   transition:
@@ -388,10 +441,10 @@ html[lang='en'] .dock-nav__lang-knob {
 }
 
 .dock-nav__cv:hover {
-  background: rgba(94, 234, 212, 0.18);
+  background: var(--color-accent-dim);
   border-color: var(--color-accent);
   border-style: solid;
-  box-shadow: 0 0 20px rgba(94, 234, 212, 0.15);
+  box-shadow: 0 0 20px var(--color-accent-glow);
   transform: translateY(-1px);
 }
 
@@ -459,7 +512,7 @@ html[lang='en'] .dock-nav__lang-knob {
     width: 100%;
     height: 1px;
     margin: 0.05rem 0.35rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--dock-divider);
   }
 
   .dock-nav__utils {
@@ -476,6 +529,11 @@ html[lang='en'] .dock-nav__lang-knob {
   .dock-nav__lang-option {
     padding: 0.4rem 0.55rem;
     font-size: 0.6875rem;
+  }
+
+  .dock-nav__theme {
+    width: 2.35rem;
+    height: 2.35rem;
   }
 
   .dock-nav__cv {

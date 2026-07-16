@@ -1,4 +1,6 @@
 :root {
+  color-scheme: dark;
+
   --color-bg: #06080d;
   --color-bg-elevated: #0c1018;
   --color-bg-card: #0f141e;
@@ -11,6 +13,18 @@
   --color-accent: #5eead4;
   --color-accent-dim: rgba(94, 234, 212, 0.12);
   --color-accent-glow: rgba(94, 234, 212, 0.35);
+
+  --dock-bg: rgba(12, 16, 24, 0.72);
+  --dock-border: rgba(255, 255, 255, 0.1);
+  --dock-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --dock-inset-line: rgba(255, 255, 255, 0.06);
+  --dock-hover-bg: rgba(255, 255, 255, 0.04);
+  --dock-control-bg: rgba(255, 255, 255, 0.04);
+  --dock-control-border: rgba(255, 255, 255, 0.1);
+  --dock-control-hover-bg: rgba(255, 255, 255, 0.06);
+  --dock-control-hover-border: rgba(255, 255, 255, 0.16);
+  --dock-divider: rgba(255, 255, 255, 0.14);
+  --dock-cv-border: rgba(94, 234, 212, 0.35);
 
   --font-display: 'Syne', system-ui, sans-serif;
   --font-body: 'Instrument Sans', system-ui, sans-serif;
@@ -32,6 +46,35 @@
   --container: min(1120px, calc(100% - 2.5rem));
   --transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   --transition-fast: 0.2s ease;
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+
+  --color-bg: #f3f5f8;
+  --color-bg-elevated: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-bg-hover: #e8ecf2;
+  --color-border: rgba(15, 23, 42, 0.08);
+  --color-border-strong: rgba(15, 23, 42, 0.16);
+  --color-text: #0f172a;
+  --color-text-muted: #5a6578;
+  --color-text-subtle: #7b8699;
+  --color-accent: #0f766e;
+  --color-accent-dim: rgba(15, 118, 110, 0.12);
+  --color-accent-glow: rgba(15, 118, 110, 0.28);
+
+  --dock-bg: rgba(255, 255, 255, 0.86);
+  --dock-border: rgba(15, 23, 42, 0.1);
+  --dock-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 12px 40px rgba(15, 23, 42, 0.12), 0 2px 8px rgba(15, 23, 42, 0.06);
+  --dock-inset-line: rgba(255, 255, 255, 0.9);
+  --dock-hover-bg: rgba(15, 23, 42, 0.04);
+  --dock-control-bg: rgba(15, 23, 42, 0.04);
+  --dock-control-border: rgba(15, 23, 42, 0.1);
+  --dock-control-hover-bg: rgba(15, 23, 42, 0.06);
+  --dock-control-hover-border: rgba(15, 23, 42, 0.16);
+  --dock-divider: rgba(15, 23, 42, 0.12);
+  --dock-cv-border: rgba(15, 118, 110, 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {

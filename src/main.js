@@ -2,10 +2,12 @@ import './styles/main.css';
 import { defaultLocale, getLocale } from './i18n/index.js';
 
 const STORAGE_KEY = 'cv-lang';
+const THEME_KEY = 'cv-theme';
 const SECTIONS = ['hero', 'process', 'experience', 'skills', 'education', 'creative', 'contact'];
 
 let currentLocale = defaultLocale;
 let content = getLocale(defaultLocale);
+let currentTheme = 'dark';
 let openExperienceId = null;
 let openProcessId = null;
 
@@ -59,6 +61,8 @@ function applyStaticTranslations() {
   if (langToggle) {
     langToggle.setAttribute('aria-label', content.ui.language || 'Language');
   }
+
+  updateThemeToggle();
 }
 
 function updateMeta() {
@@ -70,6 +74,48 @@ function updateMeta() {
 function updateLangToggle() {
   document.querySelectorAll('[data-lang]').forEach((el) => {
     el.classList.toggle('is-active', el.getAttribute('data-lang') === currentLocale);
+  });
+}
+
+function getStoredTheme() {
+  try {
+    const stored = localStorage.getItem(THEME_KEY);
+    if (stored === 'light' || stored === 'dark') return stored;
+  } catch {
+    /* ignore */
+  }
+  return 'dark';
+}
+
+function updateThemeToggle() {
+  const toggle = document.querySelector('[data-theme-toggle]');
+  if (!toggle) return;
+  const label =
+    currentTheme === 'dark'
+      ? content.ui.themeToLight || 'Switch to light mode'
+      : content.ui.themeToDark || 'Switch to dark mode';
+  toggle.setAttribute('aria-label', label);
+  toggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
+}
+
+function setTheme(theme) {
+  currentTheme = theme === 'light' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  try {
+    localStorage.setItem(THEME_KEY, currentTheme);
+  } catch {
+    /* ignore */
+  }
+  updateThemeToggle();
+}
+
+function initThemeToggle() {
+  currentTheme = getStoredTheme();
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateThemeToggle();
+
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
   });
 }
 
@@ -523,6 +569,7 @@ function init() {
   updateMeta();
 
   initLanguageToggle();
+  initThemeToggle();
   initExpandables();
   initDockNav();
   initNavHighlight();

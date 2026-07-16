@@ -34,6 +34,9 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 ::selection {
@@ -101,6 +104,11 @@ ol {
   z-index: 9999;
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  transition: opacity var(--transition);
+}
+
+html[data-theme='light'] .grain {
+  opacity: 0.02;
 }
 
 .lead {
@@ -175,6 +183,7 @@ ol {
   z-index: 1;
   isolation: isolate;
   background-color: var(--color-bg);
+  transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .container {

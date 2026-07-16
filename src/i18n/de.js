@@ -39,6 +39,9 @@ export default {
     collapse: "Details ausblenden",
     sectionNav: "Abschnitte",
     downloadCvShort: "PDF",
+    themeToggle: "Design umschalten",
+    themeToLight: "Zum hellen Design wechseln",
+    themeToDark: "Zum dunklen Design wechseln",
   },
 
   hero: {
