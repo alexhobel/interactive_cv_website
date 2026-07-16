@@ -102,10 +102,13 @@
 
 .process-steps {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-lg);
   position: relative;
   margin-bottom: var(--space-2xl);
+  width: 100%;
+  min-width: 0;
+  align-items: start;
 }
 
 .process-steps::before {
@@ -121,7 +124,9 @@
 
 .process-step {
   position: relative;
-  padding: var(--space-lg);
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-bg-card);
@@ -143,7 +148,7 @@
 .process-step__header.expand-trigger {
   width: 100%;
   margin-bottom: 0;
-  padding: var(--space-lg);
+  padding: var(--space-md);
   background: none;
   border: none;
   cursor: pointer;
@@ -154,6 +159,7 @@
 
 .process-step__title {
   flex: 1;
+  min-width: 0;
 }
 
 .process-step .expand-label {
@@ -168,7 +174,7 @@
 }
 
 .process-step .expand-body__inner {
-  padding: 0 var(--space-lg) var(--space-lg);
+  padding: 0 var(--space-md) var(--space-md);
 }
 
 .process-step__dot {
@@ -306,16 +312,13 @@
   border-color: rgba(94, 234, 212, 0.2);
 }
 
-.exp-item__header {
-  padding: var(--space-lg) var(--space-xl);
-}
-
 .exp-item__header.expand-trigger {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   align-items: start;
+  padding: var(--space-md) var(--space-lg);
   background: none;
   border: none;
   cursor: pointer;
@@ -339,8 +342,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
@@ -366,6 +369,13 @@
 
 .expand-body__inner {
   overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.is-open .expand-body__inner {
+  opacity: 1;
 }
 
 .exp-item__stack {
@@ -418,7 +428,7 @@
 }
 
 .exp-item__details {
-  padding: var(--space-md) var(--space-xl) var(--space-lg);
+  padding: var(--space-sm) var(--space-lg) var(--space-md);
   border-top: 1px solid var(--color-border);
 }
 

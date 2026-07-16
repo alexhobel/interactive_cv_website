@@ -6,7 +6,8 @@ const SECTIONS = ['hero', 'process', 'experience', 'skills', 'education', 'creat
 
 let currentLocale = defaultLocale;
 let content = getLocale(defaultLocale);
-let openExperienceId = 'ectool';
+let openExperienceId = null;
+let openProcessId = null;
 
 const chevronIcon =
   '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5.5L7 9.5L11 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
@@ -90,19 +91,30 @@ function renderProcess() {
   flow.innerHTML = `
     <div class="process-steps">
       ${steps
-        .map(
-          (step, i) => `
-        <article class="process-step" style="--step-index: ${i}">
-          <div class="process-step__header">
+        .map((step, i) => {
+          const isOpen = openProcessId === step.id;
+          return `
+        <article class="process-step${isOpen ? ' is-open' : ''}" style="--step-index: ${i}" data-expand-id="${step.id}">
+          <button
+            class="process-step__header expand-trigger"
+            type="button"
+            aria-expanded="${isOpen}"
+            aria-controls="process-details-${step.id}"
+          >
             <span class="process-step__dot" aria-hidden="true"></span>
             <span class="process-step__number">${String(i + 1).padStart(2, '0')}</span>
             <h3 class="process-step__title">${step.title}</h3>
+            <span class="expand-toggle" aria-hidden="true">${chevronIcon}</span>
+          </button>
+          <div class="expand-body" id="process-details-${step.id}">
+            <div class="expand-body__inner">
+              <ul class="process-step__list">
+                ${step.items.map((item) => `<li>${item}</li>`).join('')}
+              </ul>
+            </div>
           </div>
-          <ul class="process-step__list">
-            ${step.items.map((item) => `<li>${item}</li>`).join('')}
-          </ul>
-        </article>`
-        )
+        </article>`;
+        })
         .join('')}
     </div>`;
 }
@@ -241,6 +253,15 @@ function renderDynamicContent() {
 }
 
 function initExpandables() {
+  document.getElementById('process-flow')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.expand-trigger');
+    if (!btn) return;
+    const id = btn.closest('[data-expand-id]')?.dataset.expandId;
+    if (!id) return;
+    openProcessId = openProcessId === id ? null : id;
+    renderProcess();
+  });
+
   document.getElementById('experience-timeline')?.addEventListener('click', (e) => {
     const btn = e.target.closest('.expand-trigger');
     if (!btn) return;
