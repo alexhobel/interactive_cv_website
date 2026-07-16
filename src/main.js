@@ -75,12 +75,12 @@ function updateLangToggle() {
 
 function renderNav() {
   const navItems = [
-    { id: 'process', label: content.nav.process },
-    { id: 'experience', label: content.nav.experience },
-    { id: 'skills', label: content.nav.skills },
-    { id: 'education', label: content.nav.education },
-    { id: 'creative', label: content.nav.creative },
-    { id: 'contact', label: content.nav.contact },
+    { id: 'process', label: content.nav.process, short: content.navShort?.process },
+    { id: 'experience', label: content.nav.experience, short: content.navShort?.experience },
+    { id: 'skills', label: content.nav.skills, short: content.navShort?.skills },
+    { id: 'education', label: content.nav.education, short: content.navShort?.education },
+    { id: 'creative', label: content.nav.creative, short: content.navShort?.creative },
+    { id: 'contact', label: content.nav.contact, short: content.navShort?.contact },
   ];
 
   const dockList = document.getElementById('dock-nav-list');
@@ -88,10 +88,15 @@ function renderNav() {
 
   if (dockList) {
     dockList.innerHTML = navItems
-      .map(
-        ({ id, label }) =>
-          `<li><a class="dock-nav__link" href="#${id}" data-nav="${id}">${label}</a></li>`
-      )
+      .map(({ id, label, short }) => {
+        const shortLabel = short || label;
+        return `<li>
+          <a class="dock-nav__link" href="#${id}" data-nav="${id}" aria-label="${label}">
+            <span class="dock-nav__label dock-nav__label--full">${label}</span>
+            <span class="dock-nav__label dock-nav__label--short" aria-hidden="true">${shortLabel}</span>
+          </a>
+        </li>`;
+      })
       .join('');
   }
 

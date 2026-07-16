@@ -14,6 +14,15 @@ export default {
     contact: 'Contact',
   },
 
+  navShort: {
+    process: 'Approach',
+    experience: 'Exp.',
+    skills: 'Skills',
+    education: 'Edu.',
+    creative: 'Creative',
+    contact: 'Contact',
+  },
+
   ui: {
     skipToContent: 'Skip to content',
     downloadCv: 'Download PDF CV',
