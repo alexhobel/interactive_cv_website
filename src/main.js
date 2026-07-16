@@ -356,9 +356,17 @@ function initDockNav() {
   const THRESHOLD = 14;
   const TOP_REVEAL = 48;
   const HOLD_MS = 2800;
+  const ORIENTATION_LOCK_MS = 550;
+  const mobileUiMq = window.matchMedia('(max-width: 900px), (hover: none) and (pointer: coarse)');
   let lastY = window.scrollY;
   let holdUntil = 0;
+  let orientationLockUntil = 0;
   let ticking = false;
+  let orientationTimer;
+  let lastW = window.innerWidth;
+  let lastH = window.innerHeight;
+
+  const isMobileUi = () => mobileUiMq.matches;
 
   const showDock = (y) => {
     const wasHidden = dock.classList.contains('is-scroll-hidden');
@@ -367,8 +375,46 @@ function initDockNav() {
     lastY = y;
   };
 
+  const lockDuringOrientation = () => {
+    if (!isMobileUi()) return;
+    orientationLockUntil = Date.now() + ORIENTATION_LOCK_MS;
+    dock.classList.remove('is-scroll-hidden');
+    lastY = window.scrollY;
+    clearTimeout(orientationTimer);
+    orientationTimer = setTimeout(() => {
+      lastY = window.scrollY;
+      orientationLockUntil = 0;
+    }, ORIENTATION_LOCK_MS);
+  };
+
+  const onViewportChange = () => {
+    if (!isMobileUi()) {
+      lastW = window.innerWidth;
+      lastH = window.innerHeight;
+      return;
+    }
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const orientationFlipped = (w > h) !== (lastW > lastH);
+    const majorBothAxes = Math.abs(w - lastW) > 60 && Math.abs(h - lastH) > 100;
+    lastW = w;
+    lastH = h;
+
+    // Ignore URL-bar chrome resizes; only react to real orientation / major viewport swaps
+    if (orientationFlipped || majorBothAxes) {
+      lockDuringOrientation();
+    }
+  };
+
   const syncScrollHide = () => {
     const y = window.scrollY;
+
+    // Mobile orientation: ignore scroll deltas until the viewport settles
+    if (isMobileUi() && Date.now() < orientationLockUntil) {
+      lastY = y;
+      return;
+    }
 
     if (y <= TOP_REVEAL) {
       showDock(y);
@@ -401,6 +447,10 @@ function initDockNav() {
     },
     { passive: true }
   );
+
+  window.addEventListener('orientationchange', lockDuringOrientation);
+  window.addEventListener('resize', onViewportChange);
+  window.visualViewport?.addEventListener('resize', onViewportChange);
 }
 
 function initNavHighlight() {
