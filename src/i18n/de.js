@@ -14,15 +14,6 @@ export default {
     contact: "Kontakt",
   },
 
-  navShort: {
-    process: "Prozess",
-    experience: "Erfahrung",
-    skills: "Skills",
-    education: "Bildung",
-    creative: "Kreativ",
-    contact: "Kontakt",
-  },
-
   ui: {
     skipToContent: "Zum Inhalt springen",
     downloadCv: "PDF Lebenslauf",

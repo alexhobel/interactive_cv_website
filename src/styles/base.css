@@ -13,12 +13,6 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-@media (max-width: 900px) {
-  html {
-    scroll-padding-bottom: 9.5rem;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
