@@ -87,6 +87,15 @@
   }
 }
 
+/* Mobile: keep the display name inside the same content frame as body copy */
+@media (max-width: 640px) {
+  .hero__name {
+    font-size: clamp(2.5rem, 9.5vw, 3rem);
+    letter-spacing: -0.025em;
+    max-width: 100%;
+  }
+}
+
 /* Process */
 .process {
   border-top: 1px solid var(--color-border);
