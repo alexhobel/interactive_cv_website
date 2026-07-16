@@ -215,9 +215,10 @@
 }
 
 .dock-nav.is-visible.is-scroll-hidden {
-  opacity: 0;
-  pointer-events: none;
+  /* Transform-only: do not toggle opacity or backdrop-filter —
+     both recomposite content behind the dock (Kontakt flash). */
   transform: translateX(-50%) translateY(calc(100% + 1.75rem + env(safe-area-inset-bottom, 0px)));
+  pointer-events: none;
 }
 
 .dock-nav__inner {

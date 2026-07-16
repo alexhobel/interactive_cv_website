@@ -168,6 +168,15 @@ ol {
   padding: var(--space-4xl) 0;
 }
 
+/* Isolate page content from dock backdrop-filter compositing */
+#main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  background-color: var(--color-bg);
+}
+
 .container {
   width: var(--container);
   margin-inline: auto;
