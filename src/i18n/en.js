@@ -43,7 +43,7 @@ export default {
 
   hero: {
     role: 'Software Developer',
-    tagline: 'Web development · Production systems',
+    tagline: 'Web development · digital products',
     summary:
       'Software developer focused on web development and thoughtful digital product delivery. For me, the priority is not just technical implementation, but first understanding requirements, goals, and the context of use. On that basis, I develop solutions — using prototyping, testing, and appropriate processes depending on the project — that are clearly structured, maintainable, and make sense from a domain perspective.',
   },

@@ -43,7 +43,7 @@ export default {
 
   hero: {
     role: "Softwareentwickler",
-    tagline: "Webdevelopment · Produktionssysteme",
+    tagline: "Webdevelopment · digitale Produkte",
     summary:
       "Softwareentwickler mit Schwerpunkt auf Webentwicklung und durchdachter digitaler Produktumsetzung. Im Fokus steht für mich nicht nur die technische Implementierung, sondern zuerst das Verständnis für Anforderungen, Zielsetzung und Nutzungskontext. Auf dieser Basis entwickle ich – je nach Projekt mit Prototyping, Testing und passenden Prozessen – Lösungen, die klar strukturiert, wartbar und fachlich sinnvoll sind.",
   },
